@@ -32,3 +32,5 @@ notes_table.update({'id': an_id}, {"title": title, "content": content})
 #     new['title'] = title
 # None is still translate to NULL in SQL, that's why I created Null so it's better
 # of creating a Sentinel value
+
+# Oh, and I remind you that using this Null sentinel value is required.
