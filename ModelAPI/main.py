@@ -1,21 +1,22 @@
 """Main entry"""
 
 from uuid import uuid4
+
+from sqlite_database import Null
 from flask import Flask, redirect, render_template, request, flash
 from model.notes import Notes  # pylint: disable=import-error
 
 app = Flask(__name__)
 app.secret_key = "some random key"
-NULL = object()
 
 
 @app.post("/note")
 def push_note():
     """Push a note"""
-    title = request.form.get("title", NULL)
-    content = request.form.get("content", NULL)
+    title = request.form.get("title", Null)
+    content = request.form.get("content", Null)
 
-    if NULL in (title, content):
+    if Null in (title, content):
         flash("Cannot create: Either title/content is undefined", "danger")
     else:
         flash("Note created", "success")
@@ -28,21 +29,15 @@ def push_note():
 @app.post("/note/<note_id>")
 def note_patch(note_id):
     """Patch a note"""
-    title = request.form.get("title", NULL)
-    content = request.form.get("content", NULL)
+    title = request.form.get("title", Null)
+    content = request.form.get("content", Null)
 
     note = Notes.first(id=note_id)
     if not note:
         flash(f"There is no note of {note}", "danger")
         return redirect("/")
 
-    updates = {}
-    if title is not NULL:
-        updates["title"] = title
-    if content is not NULL:
-        updates["content"] = content
-
-    note.update(**updates)
+    note.update(title=title, content=content)
     flash("Updated")
     return redirect("/")
 
