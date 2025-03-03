@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+
+    {%- include "_base.html" %}
+    {%- from "flashes.html" import render_flashes %}
+</head>
+
+<body>
+    {{ render_flashes() }}
+
+    <div class="container mt-2 border-primary">
+        <h3>Simple Note App</h3>
+
+        <form action="/note/{{note.id}}" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="My title" value="{{ note.title }}" />
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" name="content" id="content" rows="3">{{ note.content }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</body>
+
+</html>

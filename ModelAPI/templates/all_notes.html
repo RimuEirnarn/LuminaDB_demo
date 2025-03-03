@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {%- include "_base.html" %}
+    {%- from "flashes.html" import render_flashes %}
+</head>
+<body>
+    {{ render_flashes() }}
+
+    <div
+        class="table-responsive"
+    >
+        <table
+            class="table table-primary"
+        >
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for note in notes %}
+                <tr>
+                    <td scope="row">{{ note.id }}</td>
+                    <td>{{ note.title }}</td>
+                    <td>{{ note.content }}</td>
+                </tr>
+                {%- endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

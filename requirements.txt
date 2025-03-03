@@ -1,0 +1,6 @@
+sqlite-database
+
+# Some showcase requires these:
+
+flask
+argh

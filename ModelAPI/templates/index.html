@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+
+    {%- include "_base.html" %}
+    {%- from "flashes.html" import render_flashes %}
+</head>
+
+<body>
+    {{ render_flashes() }}
+
+    <div class="container mt-2 border-primary">
+        <h3>Simple Note App</h3>
+
+        <form action="/note" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="My title" />
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <div class="container mt-3">
+        {%- for note in notes %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="fs-6 text-end">{{ note.id }}</p>
+                <h4 class="card-title">{{note.title}}</h4>
+                <p class="card-text">{{ note.content }}</p>
+                <a name="Delete {{note.id}}" id="delete-{{note.id}}" class="btn btn-danger" href="/note/{{note.id}}/delete"
+                role="button">Delete</a>
+                <a name="Edit {{note.id}}" id="edit-{{note.id}}" class="btn btn-primary" href="/note/{{note.id}}/edit"
+                role="button">Edit</a>
+            </div>
+        </div>
+        {%- endfor %}
+    </div>
+</body>
+
+</html>

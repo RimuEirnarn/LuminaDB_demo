@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ note.title }}</title>
+
+    {%- include "_base.html" %}
+    {%- from "flashes.html" import render_flashes %}
+</head>
+<body>
+    {{ render_flashes() }}
+    <h4>{{ note.id }}</h4>
+    <h1>{{ title }}</h1>
+
+    <p>{{ content }}</p>
+</body>
+</html>
