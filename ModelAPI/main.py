@@ -88,7 +88,7 @@ def get_all():
 @app.get('/')
 def index():
     """Index"""
-    notes = Notes.where().fetch()
+    notes = Notes.all()
 
     return render_template("index.html", notes=[note.to_dict() for note in notes])
 
