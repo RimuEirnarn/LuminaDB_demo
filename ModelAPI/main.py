@@ -81,7 +81,7 @@ def edit_form(note_id):
 def get_all():
     """Get all notes"""
 
-    notes = Notes.where().fetch()
+    notes = Notes.all()
 
     return render_template("all_notes.html", notes=[note.to_dict() for note in notes])
 
