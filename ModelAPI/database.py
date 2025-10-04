@@ -1,5 +1,5 @@
 """Database"""
 
-from sqlite_database import Database
+from luminadb import Database
 
 db = Database("webnote.db")

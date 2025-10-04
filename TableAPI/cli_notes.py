@@ -2,7 +2,7 @@
 
 from uuid import uuid4
 from argh import dispatch_commands, arg
-from sqlite_database import Database, text
+from luminadb import Database, text
 
 def generate_id():
     """Generate an ID"""

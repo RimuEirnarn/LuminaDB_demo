@@ -1,6 +1,6 @@
 """Notes"""
 
-from sqlite_database import BaseModel, model, Primary
+from luminadb import BaseModel, model, Primary
 from database import db
 
 @model(db)

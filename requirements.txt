@@ -1,5 +1,4 @@
-sqlite-database
-
+LuminaDB
 # Some showcase requires these:
 
 flask

@@ -2,7 +2,7 @@
 # pylint: disable=invalid-name
 
 from uuid import uuid4
-from sqlite_database import Null
+from luminadb import Null
 from table_api_01_create_db import notes_table
 
 # Previously, we have 2 notes.

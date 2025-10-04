@@ -2,7 +2,7 @@
 
 from uuid import uuid4
 
-from sqlite_database import Null
+from luminadb import Null
 from flask import Flask, redirect, render_template, request, flash
 from model.notes import Notes  # pylint: disable=import-error
 
