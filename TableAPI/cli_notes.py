@@ -2,7 +2,7 @@
 
 from uuid import uuid4
 from argh import dispatch_commands, arg
-from luminadb import Database, text
+from luminadb import Database, text, Null
 
 def generate_id():
     """Generate an ID"""
@@ -42,12 +42,10 @@ def add_note(title: str, content: str):
 @arg("--content", '-c', help="New content")
 def update_note(note_id: str, title: str = '', content: str = ""):
     """Change/update a note based on Note ID"""
-    updates = {}
-    if title:
-        updates['title'] = title
-
-    if content:
-        updates['content'] = content
+    updates = {
+        "title": title or Null,
+        "content": content or Null
+    }
 
     notes.update({'id': note_id}, updates) # Don't blindly update stuff!
 

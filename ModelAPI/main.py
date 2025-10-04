@@ -18,6 +18,7 @@ def push_note():
 
     if Null in (title, content):
         flash("Cannot create: Either title/content is undefined", "danger")
+        return redirect("/"), 401
     else:
         flash("Note created", "success")
 
@@ -35,7 +36,7 @@ def note_patch(note_id):
     note = Notes.first(id=note_id)
     if not note:
         flash(f"There is no note of {note}", "danger")
-        return redirect("/")
+        return redirect("/"), 401
 
     note.update(title=title, content=content)
     flash("Updated")
@@ -50,7 +51,7 @@ def delete_note(note_id):
     note = Notes.first(id=note_id)
     if not note:
         flash(f"There's no note of {note}", "warning")
-        return redirect("/")
+        return redirect("/"), 404
 
     note.delete()
     flash("Deleted", 'success')
@@ -81,14 +82,14 @@ def edit_form(note_id):
 def get_all():
     """Get all notes"""
 
-    notes = Notes.where().fetch()
+    notes = Notes.all()
 
     return render_template("all_notes.html", notes=[note.to_dict() for note in notes])
 
 @app.get('/')
 def index():
     """Index"""
-    notes = Notes.where().fetch()
+    notes = Notes.all()
 
     return render_template("index.html", notes=[note.to_dict() for note in notes])
 
