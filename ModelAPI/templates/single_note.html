@@ -11,6 +11,7 @@
 <body>
     {{ render_flashes() }}
     <h4>{{ note.id }}</h4>
+    <h6>(C: {{ note.created_at | strftime }} M: {{ note.modified_at | strftime }})</h6>
     <h1>{{ title }}</h1>
 
     <p>{{ content }}</p>

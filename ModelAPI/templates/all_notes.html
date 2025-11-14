@@ -20,6 +20,8 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">CREATED AT</th>
+                    <th scope="col">MODIFIED AT</th>
                     <th scope="col">Title</th>
                     <th scope="col">Content</th>
                 </tr>
@@ -28,6 +30,8 @@
                 {%- for note in notes %}
                 <tr>
                     <td scope="row">{{ note.id }}</td>
+                    <td>{{ note.created_at | strftime }}</td>
+                    <td>{{ note.modified_at | strftime }}</td>
                     <td>{{ note.title }}</td>
                     <td>{{ note.content }}</td>
                 </tr>

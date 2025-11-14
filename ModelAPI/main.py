@@ -1,5 +1,7 @@
 """Main entry"""
 
+from datetime import datetime
+from time import time
 from uuid import uuid4
 
 from luminadb import Null
@@ -9,12 +11,23 @@ from model.notes import Notes  # pylint: disable=import-error
 app = Flask(__name__)
 app.secret_key = "some random key"
 
+def now():
+    """Return current timestamp"""
+    return time()
+
+def strftime(ts: float):
+    if not ts:
+        return ""
+    return datetime.fromtimestamp(ts).strftime("%Y/%m/%d %H.%M.%S")
+
+app.jinja_env.filters['strftime'] = strftime
 
 @app.post("/note")
 def push_note():
     """Push a note"""
     title = request.form.get("title", Null)
     content = request.form.get("content", Null)
+    nowts = now()
 
     if Null in (title, content):
         flash("Cannot create: Either title/content is undefined", "danger")
@@ -22,7 +35,7 @@ def push_note():
     else:
         flash("Note created", "success")
 
-    Notes.create(id=str(uuid4()), title=title, content=content)
+    Notes.create(id=str(uuid4()), title=title, content=content, created_at=nowts)
     return redirect("/")
 
 
@@ -32,13 +45,14 @@ def note_patch(note_id):
     """Patch a note"""
     title = request.form.get("title", Null)
     content = request.form.get("content", Null)
+    nowts = now()
 
     note = Notes.first(id=note_id)
     if not note:
         flash(f"There is no note of {note}", "danger")
         return redirect("/"), 401
 
-    note.update(title=title, content=content)
+    note.update(title=title, content=content, modified_at=nowts)
     flash("Updated")
     return redirect("/")
 

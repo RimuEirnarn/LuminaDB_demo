@@ -11,3 +11,5 @@ class Notes(BaseModel):
     id: str
     title: str
     content: str
+    created_at: float
+    modified_at: float = 0
