@@ -2,7 +2,7 @@
 # pylint: disable=invalid-name
 
 from uuid import uuid4
-from luminadb import Null
+from luminadb import SKIP
 from table_api_01_create_db import notes_table
 
 # Previously, we have 2 notes.
@@ -12,7 +12,7 @@ notes_table.update({'title': "My title"}, # We checked if a row has title of "My
                    {"title": "Some random title"}) # And then we provide our changes
 
 # Oh, when updating/inserting data, from version v0.6.5,
-# you can now use pre-defined Null sentinel. What does it do?
+# you can now use pre-defined SKIP sentinel. What does it do?
 # Suppose we have this:
 
 an_id = str(uuid4())
@@ -20,7 +20,7 @@ notes_table.insert({'title': "Hey, this is a title",
                     "content": "wahdgjasdgjas",
                     'id': an_id})
 
-title = Null
+title = SKIP
 content = "This is a content"
 
 notes_table.update({'id': an_id}, {"title": title, "content": content})
@@ -30,7 +30,7 @@ notes_table.update({'id': an_id}, {"title": title, "content": content})
 # And then updating it like:
 # if title:
 #     new['title'] = title
-# None is still translate to NULL in SQL, that's why I created Null so it's better
+# None is still translate to NULL in SQL, that's why I created SKIP so it's better
 # of creating a Sentinel value
 
-# Oh, and I remind you that using this Null sentinel value is required.
+# Oh, and I remind you that using this SKIP sentinel value is required.
